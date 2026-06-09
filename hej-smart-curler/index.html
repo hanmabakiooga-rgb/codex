@@ -493,6 +493,85 @@
       </div>
     </section>
 
+    <section aria-labelledby="cooling-title">
+      <h2 id="cooling-title">冷却家電リサーチと内部構造案</h2>
+      <div class="notice">
+        <strong>冷やす技術は既に複数ある。</strong>
+        ただし、カーラーに入れる場合は「冷風」「接触冷却」「送風巻き付け」を混同しない。ドライヤーの冷風は基本的にヒーターOFFの常温風。首冷却家電はペルチェで冷えるが、反対側の熱を逃がすヒートシンクとファンが必要になる。
+      </div>
+      <div class="grid-3" style="margin-top:16px;">
+        <article class="card">
+          <span class="tag product">Cold Air</span>
+          <h3>ドライヤー型の冷風切替</h3>
+          <p>小型ブロワーで風を流し、ヒーターをOFFにして常温風へ切り替える。軽く作れるが、室温以下には冷えない。</p>
+          <div class="list small">
+            <div>構成：BLDCファン、風路、PTCヒーター、温度センサー。</div>
+            <div>利点：軽い、安い、髪を乱しにくい。</div>
+            <div>弱点：夏場の洗面所では「冷たい」より「ぬるい風」になりやすい。</div>
+          </div>
+        </article>
+        <article class="card">
+          <span class="tag product">Peltier</span>
+          <h3>首冷却家電型の接触冷却</h3>
+          <p>ペルチェ素子で冷却プレートを冷やす。首冷却機のように局所冷却はできるが、熱を反対側へ逃がす設計が重い。</p>
+          <div class="list small">
+            <div>構成：ペルチェ、冷却プレート、ヒートシンク、排熱ファン。</div>
+            <div>利点：室温以下の冷感を作れる。</div>
+            <div>弱点：重い、電池消費、結露、髪への熱移動効率。</div>
+          </div>
+        </article>
+        <article class="card">
+          <span class="tag product">Hybrid</span>
+          <h3>HEJ向け分離構造</h3>
+          <p>送風・冷却源はハンドルまたはスタンド側に置き、髪に残るカーラーは軽量な外周バレルにする。ここが現実的な本命。</p>
+          <div class="list small">
+            <div>巻く：細い縦スリットから常温/冷風で外周へ誘導。</div>
+            <div>保持：軽いバレルと薄い保持スリーブで固定。</div>
+            <div>冷やす：必要ならスタンド側で冷風を作り、カーラーへ送る。</div>
+          </div>
+        </article>
+      </div>
+      <div class="table-wrap" style="margin-top:16px;">
+        <table>
+          <caption>HEJカーラーに入れる場合の内部構造比較</caption>
+          <thead>
+            <tr>
+              <th scope="col">案</th>
+              <th scope="col">内部構造</th>
+              <th scope="col">成立しやすさ</th>
+              <th scope="col">主なリスク</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1. カーラー単体ファン内蔵</td>
+              <td>各カーラーに小型ファン、風路、電池、制御基板、温度センサーを入れる。</td>
+              <td>使い勝手は強いが、4本セットでは重量・原価が厳しい。</td>
+              <td>重い、太い、騒音、電池持ち、排熱。</td>
+            </tr>
+            <tr>
+              <td>2. 別体ハンドル送風</td>
+              <td>ハンドルにファン/ヒーター/冷風切替を集約。軽量バレルを差して巻き、巻いた後に外して髪に残す。</td>
+              <td><strong>本命。</strong> Dyson型技術を応用しつつ、保持カーラーで差別化できる。</td>
+              <td>着脱機構、巻いた後の保持、知財確認。</td>
+            </tr>
+            <tr>
+              <td>3. 送風スタンド式</td>
+              <td>スタンドにファン、必要ならペルチェ/ヒートシンクを置き、カーラーへ冷風を送る。</td>
+              <td>カーラーを軽くできる。旅行性も作りやすい。</td>
+              <td>装着しながら巻けるか、使い方が直感的か。</td>
+            </tr>
+            <tr>
+              <td>4. ペルチェ内蔵カーラー</td>
+              <td>各カーラーにペルチェ、冷却面、排熱面、ファン、電池を入れる。</td>
+              <td>冷却家電としては分かりやすいが、カーラーには重すぎる可能性が高い。</td>
+              <td>結露、排熱、重量、コスト、髪への冷却効率。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
     <section aria-labelledby="comparison-title">
       <h2 id="comparison-title">競合比較の再定義</h2>
       <div class="table-wrap">
@@ -737,6 +816,25 @@ Key message: the technology exists; HEJ must separate air-assisted wrapping from
 
         <article class="card image-brief">
           <div>
+            <span class="tag visual">Image 08</span>
+            <h3>冷風・冷却ユニット内部構造</h3>
+          </div>
+          <div class="image-frame">
+            <img src="hej_smart_curler_assets/hej-smart-curler-cooling-cutaway-draft-01.png" alt="送風源、軽量バレル、保持スリーブを分けたスマートカーラー内部構造のカットアウェイラフ">
+          </div>
+          <p class="small">生成済みラフ。送風/冷却源、軽量バレル、保持スリーブを分ける構造案。ペルチェを入れる場合も、各カーラーではなくハンドルまたはスタンド側に寄せる前提。</p>
+          <pre>Use case: product-mockup
+Asset type: internal cutaway concept render
+Primary request: an exploded cutaway view of a compact smart hair curler system showing cold-air switching and optional thermoelectric cooling
+Subject: airflow handle or charging stand with micro blower, battery, control board, optional cooling module and heatsink; removable lightweight barrel with vertical airflow channels; thin retaining sleeve
+Composition/framing: 3/4 exploded view, internals visible through cutaway windows
+Materials/textures: satin ceramic plastic, matte silicone gaskets, brushed metal heatsink fins, small fan blades, circuit board glimpses
+Constraints: no text, no logo, no Dyson copy, no bulky appliance, optional cooling module stays in handle or stand rather than every barrel
+Key message: keep the curler on hair light; move fan/cooling mass into a handle or stand</pre>
+        </article>
+
+        <article class="card image-brief">
+          <div>
             <span class="tag visual">Image 06</span>
             <h3>表面保持案</h3>
           </div>
@@ -777,6 +875,13 @@ Key message: the surface geometry holds hair gently while allowing easy release<
               <td>固定機構の比較</td>
               <td>Route A 風巻き / Route B 表面保持</td>
               <td>髪を内側へ通さず、よじれずに巻き付くか比較できる</td>
+            </tr>
+            <tr>
+              <td>P0</td>
+              <td>Agent B</td>
+              <td>冷風・冷却構造の比較</td>
+              <td>常温風 / ペルチェ / 別体ハンドル / 送風スタンドの構造表</td>
+              <td>カーラー本体を重くせずに冷却体験を作る方式が選べる</td>
             </tr>
             <tr>
               <td>P0</td>
@@ -830,6 +935,8 @@ Key message: the surface geometry holds hair gently while allowing easy release<
       <ul class="source-list">
         <li>Dyson公式 Airwrapページでは、モデルにより価格表示が異なる。価格比較はモデル名と確認日を固定する必要がある。<a href="https://www.dyson.co.jp/hair-care/hair-stylers/airwrap/multi-styler-ceramic-pink">Dyson Airwrap 公式ページ</a></li>
         <li>Panasonic カールン8 EH-HC50は、35mm 2本、30mm 4本、25mm 2本。準備時間は大カーラー約60秒、特大・大大約90秒。<a href="https://panasonic.jp/hair/products/EH-HC50/spec.html">Panasonic EH-HC50 仕様</a></li>
+        <li>Sony REON POCKETは、身体を冷やす/温めるウェアラブルサーモデバイスとして展開されている。首冷却系は、局所冷却と排熱設計を分けて見る必要がある。<a href="https://reonpocket.sony.co.jp/reonpocket5/">Sony REON POCKET 5 公式ページ</a></li>
+        <li>ドライヤーの冷風・温冷切替は、髪の仕上げ用の風モードとして既存家電に広く存在する。カーラーに入れる場合は、室温風か、ペルチェ等による能動冷却かを分けて設計する。<a href="https://panasonic.jp/hair/products/EH-NA0J.html">Panasonic ヘアードライヤー ナノケア EH-NA0J 公式ページ</a></li>
         <li>リチウムイオン蓄電池は条件により電気用品安全法の規制対象となり、PSE表示等の確認が必要。<a href="https://www.meti.go.jp/product_safety/consumer/lithium_ion_battery.html">経済産業省 リチウムイオン蓄電池の注意喚起</a></li>
         <li>電気用品安全法では、対象電気用品の製造・輸入・販売等に関する技術基準適合や表示義務がある。<a href="https://www.meti.go.jp/english/policy/economy/consumer/pse/index.html">METI Electrical Appliances and Materials Safety Act</a></li>
       </ul>
