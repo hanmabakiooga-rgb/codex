@@ -429,23 +429,45 @@
       <h2 id="lock-title">最重要論点：髪をどう固定するか</h2>
       <div class="notice">
         <strong>この商品の成否は、アプリでも温度制御でもなく「巻いた髪が自然にほどけない固定機構」で決まる。</strong>
-        クリップを大きく付けると既存ホットカーラーに戻ってしまう。一方で完全クリップレスに寄せすぎると、髪質・毛量・レイヤーによって保持力が足りない。v2では「できるだけクリップを使わないが、必要最小限の保持補助は許す」方針にする。
+        クリップを大きく付けると既存ホットカーラーに戻ってしまう。一方で、髪を内側スリットへ通す構造は毛束がよじれる。v2.1では「髪を内側へ入れない」「外側表面で巻き付ける」「風または表面構造でほどけを防ぐ」方針に変更する。
       </div>
       <div class="grid-3" style="margin-top:16px;">
         <article class="card">
-          <span class="tag risk">P0 / Hold</span>
-          <h3>摩擦で保持する</h3>
-          <p>外周に柔らかい微細リブ、シリコン帯、浅いスパイラル溝を入れる。髪を傷めず、ほどく時に引っかからない摩擦係数が必要。</p>
+          <span class="tag risk">P0 / NG</span>
+          <h3>内側スリット案は保留</h3>
+          <p>毛先を穴や溝に差し込むと、巻き始めで髪がねじれる。髪を通す構造ではなく、外周面に沿って自然に寝かせる構造へ寄せる。</p>
         </article>
         <article class="card">
-          <span class="tag risk">P0 / Lock</span>
-          <h3>端だけ軽く留める</h3>
-          <p>大きなクリップではなく、毛先を差し込む短いスリットや薄い押さえリングで初動だけ固定する。見た目の古さを避ける。</p>
+          <span class="tag risk">P0 / Air</span>
+          <h3>風で巻き付ける</h3>
+          <p>Dyson Airwrapのように風で髪を引き寄せる発想は有力。ただし模倣・特許・モーター重量・騒音・電池消費が課題になる。</p>
         </article>
         <article class="card">
-          <span class="tag risk">P0 / Test</span>
-          <h3>髪質別に落下テスト</h3>
-          <p>細毛、太毛、レイヤー、前髪、湿度差で保持力を検証する。机上スペックでは判断できないため、モック試作の最初の検証項目にする。</p>
+          <span class="tag risk">P0 / Surface</span>
+          <h3>表面で保持する</h3>
+          <p>外周の浅いスパイラルガイド、低摩擦の山、柔らかい帯で髪を外側に寝かせたまま保持する。絡ませず、ほどく時に引っかけない。</p>
+        </article>
+      </div>
+      <div class="grid-2" style="margin-top:16px;">
+        <article class="card">
+          <span class="tag product">Route A</span>
+          <h3>Air-assist wrap</h3>
+          <p>弱い冷風または常温風で髪をバレル外周に引き寄せ、巻き付いた後に低温加熱と冷却で固定する。体験は強いが、本体にファンと風路が必要になる。</p>
+          <div class="list small">
+            <div>利点：クリップレスに近づく。巻き始めの失敗を減らせる。</div>
+            <div>課題：Dysonとの差別化、知財確認、騒音、重量、バッテリー。</div>
+            <div>検証：髪が自動で巻き始める最低風量と、髪が乱れない風路。</div>
+          </div>
+        </article>
+        <article class="card">
+          <span class="tag product">Route B</span>
+          <h3>Surface-hold wrap</h3>
+          <p>風を使わず、外周の形状だけで髪を逃がさない。クリップレスに近いが、髪質差への対応が難しいため、微細構造の試作が必要。</p>
+          <div class="list small">
+            <div>利点：軽い、静か、電池消費が少ない、持ち運びしやすい。</div>
+            <div>課題：細毛・太毛・レイヤーで保持力が変わる。</div>
+            <div>検証：浅いスパイラル山、シリコン帯、表面粗さの比較。</div>
+          </div>
         </article>
       </div>
     </section>
@@ -499,7 +521,7 @@
         <article class="card">
           <span class="tag risk">最優先</span>
           <h3>クリップレス寄り固定</h3>
-          <p>外周リブ、毛先スリット、薄型押さえリングの3案を試す。完全クリップレスを理想に置きつつ、保持できない場合は小型ロックを許容する。</p>
+          <p>毛先を内側へ通す構造は避ける。風で巻くRoute A、または外周表面で保持するRoute Bの2案に絞る。</p>
         </article>
         <article class="card">
           <span class="tag product">必須</span>
@@ -545,7 +567,7 @@
         <article class="step">
           <div>
             <h3>固定機構の一次モック</h3>
-            <p>外周リブ、毛先スリット、薄型押さえリングの3案を、3Dプリントまたは簡易モックで比較する。ここが通らなければ商品化しない。</p>
+            <p>内側スリット案はNG寄り。風で巻くRoute Aと、表面で保持するRoute Bの2案を、3Dプリントまたは簡易モックで比較する。</p>
           </div>
         </article>
         <article class="step">
@@ -638,20 +660,58 @@ Avoid: complex dashboard, neon colors, medical or damage-repair claims</pre>
         <article class="card image-brief">
           <div>
             <span class="tag visual">Image 04</span>
-            <h3>固定機構クローズアップ</h3>
+            <h3>固定機構クローズアップ（NG寄り）</h3>
           </div>
           <div class="image-frame">
             <img src="hej_smart_curler_assets/hej-smart-curler-hold-mechanism-draft-01.png" alt="クリップレス寄り固定機構を検討するスマートカーラーのクローズアップラフ">
           </div>
-          <p class="small">生成済みラフ。固定機構の議論用。次の反復では、実際に髪が巻きついた状態と、ほどけにくさをより明確にする。</p>
+          <p class="small">生成済みラフ。ただし、髪を内側スリットへ通す見え方になっており、毛束がよじれるリスクがある。次案では採用候補から外す。</p>
           <pre>Use case: product-mockup
 Asset type: industrial design mechanism close-up
-Primary request: a compact smart hair curler designed to hold rolled hair with minimal or no large clip
-Subject: one cylindrical smart hair curler showing shallow spiral silicone micro-ribs, a small hair-end insertion slit, and a very thin sliding retaining ring
+Primary request: rejected draft direction; a compact smart hair curler with an internal slit risks twisting hair
+Subject: one cylindrical smart hair curler showing shallow spiral silicone micro-ribs and an internal hair slit, marked as a design risk
 Composition/framing: macro 3/4 close-up, barrel fills most of the image
 Materials/textures: satin ceramic plastic, matte silicone, brushed metal
 Constraints: no large clamp, no traditional bulky clip, no red heat glow, no text, no logo
-Next iteration: show a small lock of hair actually wrapped around the barrel without falling loose</pre>
+Next iteration: do not route hair inside the barrel; show hair wrapping smoothly around the outside surface only</pre>
+        </article>
+
+        <article class="card image-brief">
+          <div>
+            <span class="tag visual">Image 05</span>
+            <h3>風で巻き付ける案</h3>
+          </div>
+          <div class="image-frame">
+            <img src="hej_smart_curler_assets/hej-smart-curler-air-assist-wrap-draft-01.png" alt="低速風で髪を外周に誘導するスマートカーラー構造案のラフ">
+          </div>
+          <p class="small">生成済みラフ。髪が外周へ巻き付く方向性は良いが、開口部が大きく見えるため、次案では吸入口を控えめにし、カーラー単体らしさを強める。</p>
+          <pre>Use case: product-mockup
+Asset type: airflow-assisted smart curler mechanism concept
+Primary request: a compact smart hair curler that gently attracts hair with low-speed airflow and wraps it around the outside of the barrel
+Subject: one cylindrical curler with subtle side air slots, hair wrapping smoothly around the exterior surface, no hair entering the inside of the barrel
+Composition/framing: macro 3/4 view showing airflow path with subtle translucent arrows and a clean wrapped hair strand
+Materials/textures: satin ceramic shell, brushed metal edges, soft silicone guide bands
+Constraints: no Dyson copy, no large handle, no hot glow, no bulky fan housing, no text, no logo
+Key message: hair is guided by air onto the outside surface, then held for low-temperature set and cooling</pre>
+        </article>
+
+        <article class="card image-brief">
+          <div>
+            <span class="tag visual">Image 06</span>
+            <h3>表面保持案</h3>
+          </div>
+          <div class="image-frame">
+            <img src="hej_smart_curler_assets/hej-smart-curler-surface-hold-wrap-draft-01.png" alt="外周の浅いガイドと保持帯で髪を外側に保持するスマートカーラー構造案のラフ">
+          </div>
+          <p class="small">生成済みラフ。髪を内側へ通さない点は良いが、保持帯がやや太い。実機ではもっと浅く、髪が引っかからない表面形状へ詰める。</p>
+          <pre>Use case: product-mockup
+Asset type: surface-hold smart curler mechanism concept
+Primary request: a compact smart hair curler that keeps hair wrapped on the outside surface without a large clip and without pulling hair into a slot
+Subject: one cylindrical curler with shallow spiral guide ridges, smooth silicone retention bands, and a small flush end guard; hair strand lies flat and evenly wrapped around the exterior
+Composition/framing: close-up side view, the hair path is clear and untwisted
+Materials/textures: satin ceramic barrel, matte silicone ridges, brushed metal end caps
+Constraints: no internal slit, no traditional clamp, no teeth, no hook-and-loop texture, no text, no logo
+Key message: the surface geometry holds hair gently while allowing easy release</pre>
         </article>
       </div>
     </section>
@@ -675,8 +735,8 @@ Next iteration: show a small lock of hair actually wrapped around the barrel wit
               <td>P0</td>
               <td>Agent B</td>
               <td>固定機構の比較</td>
-              <td>外周リブ / 毛先スリット / 薄型押さえリングの3案</td>
-              <td>髪質別に巻いた後の保持力と外しやすさを比較できる</td>
+              <td>Route A 風巻き / Route B 表面保持</td>
+              <td>髪を内側へ通さず、よじれずに巻き付くか比較できる</td>
             </tr>
             <tr>
               <td>P0</td>
