@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HEJ Cold-wrap Smart Curler v2 Prototype</title>
+<style>
+  :root {
+    --ink: #161616;
+    --body: #383838;
+    --muted: #606060;
+    --faint: #767676;
+    --line: #d8d8d2;
+    --paper: #fbfaf7;
+    --panel: #ffffff;
+    --shade: #f1f0ec;
+    --charcoal: #202124;
+    --green: #235c42;
+    --blue: #274f77;
+    --amber: #85621f;
+    --red: #9d2f23;
+    --wood: #8b6f47;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--body);
+    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .page {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 40px 24px 72px;
+  }
+
+  header {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+    gap: 28px;
+    align-items: end;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 34px;
+    margin-bottom: 34px;
+  }
+
+  .eyebrow {
+    color: var(--faint);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  h1, h2, h3 {
+    color: var(--ink);
+    line-height: 1.28;
+    margin: 0;
+    letter-spacing: 0;
+  }
+
+  h1 {
+    font-size: clamp(34px, 5vw, 58px);
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-size: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    font-size: 17px;
+    margin-bottom: 8px;
+  }
+
+  p { margin: 0 0 14px; }
+  strong { color: var(--ink); }
+  a { color: var(--blue); }
+
+  .lead {
+    font-size: 17px;
+    color: var(--body);
+    max-width: 720px;
+  }
+
+  .meta {
+    display: grid;
+    gap: 8px;
+    padding: 18px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    font-size: 13px;
+  }
+
+  .meta div {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 10px;
+  }
+
+  .meta dt, .meta dd { margin: 0; }
+  .meta dt { color: var(--muted); }
+  .meta dd { color: var(--ink); font-weight: 600; }
+
+  main {
+    display: grid;
+    gap: 38px;
+  }
+
+  section {
+    min-width: 0;
+  }
+
+  .notice {
+    border-left: 4px solid var(--red);
+    background: #fff4f1;
+    padding: 16px 18px;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .grid-2, .grid-3, .grid-4 {
+    display: grid;
+    gap: 16px;
+  }
+
+  .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 18px;
+    min-width: 0;
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .tag.strategy { background: #e8f2ed; color: var(--green); }
+  .tag.product { background: #e8eef5; color: var(--blue); }
+  .tag.business { background: #f4efe2; color: var(--amber); }
+  .tag.visual { background: #eee9f4; color: #51376d; }
+  .tag.risk { background: #f8e5e1; color: var(--red); }
+
+  .kpi {
+    font-size: 28px;
+    color: var(--ink);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 4px;
+  }
+
+  .small {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .list {
+    display: grid;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .list div {
+    position: relative;
+    padding-left: 16px;
+  }
+
+  .list div::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--line);
+    position: absolute;
+    top: 0.72em;
+    left: 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    font-size: 13px;
+  }
+
+  caption {
+    text-align: left;
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+
+  th, td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    background: var(--charcoal);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: #f6f5f1; }
+
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: 8px;
+  }
+
+  .table-wrap table {
+    min-width: 760px;
+  }
+
+  .roadmap {
+    counter-reset: step;
+    display: grid;
+    gap: 12px;
+  }
+
+  .step {
+    counter-increment: step;
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    gap: 14px;
+    align-items: start;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 16px;
+  }
+
+  .step::before {
+    content: counter(step, decimal-leading-zero);
+    color: var(--faint);
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .image-brief {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 12px;
+  }
+
+  .image-frame {
+    min-height: 190px;
+    border: 1px dashed #bdb7ad;
+    border-radius: 8px;
+    background:
+      linear-gradient(135deg, rgba(139,111,71,0.12), rgba(39,79,119,0.10)),
+      #f8f6f0;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+    padding: 20px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .image-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+  }
+
+  pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    background: #202124;
+    color: #f5f2ea;
+    border-radius: 8px;
+    padding: 14px;
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.55;
+  }
+
+  .source-list {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .source-list li { margin-bottom: 6px; }
+
+  @media (max-width: 760px) {
+    .page { padding: 28px 16px 56px; }
+    header, .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    .meta div { grid-template-columns: 1fr; gap: 2px; }
+    .step { grid-template-columns: 42px 1fr; }
+  }
+
+  @media print {
+    body { background: #fff; color: #111; }
+    .page { max-width: none; padding: 20mm 16mm; }
+    section { break-inside: avoid; }
+    .card, .step, .notice { break-inside: avoid; }
+    pre { white-space: pre-wrap; color: #111; background: #f0f0f0; }
+    a { color: #111; text-decoration: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div>
+      <p class="eyebrow">HEJ Haircolor Lab / Cold-wrap Smart Curler / v2 prototype</p>
+      <h1>巻くときは、熱くない。</h1>
+      <p class="lead">
+        「熱いカーラーを巻く」体験を再設計するための、外部提案前プロトタイプ。
+        v1の弱点だった根拠不足・実現性・競合比較・画像化を分解し、検証可能なタスクに落とし込む。
+      </p>
+    </div>
+    <dl class="meta" aria-label="資料情報">
+      <div><dt>版</dt><dd>v2 / validation prototype</dd></div>
+      <div><dt>更新日</dt><dd>2026-06-09</dd></div>
+      <div><dt>作成主体</dt><dd>HEJ Haircolor Lab / 川崎ゆうき</dd></div>
+      <div><dt>用途</dt><dd>メーカー相談・OEM探索前の検証資料</dd></div>
+      <div><dt>注意</dt><dd>市場数値・原価・規制は仮説。外部提出前に要確認。</dd></div>
+    </dl>
+  </header>
+
+  <main>
+    <section aria-labelledby="decision-title">
+      <h2 id="decision-title">v2の結論</h2>
+      <div class="notice">
+        <strong>売り文句を「熱を持たないホットカーラー」から「装着時に熱くないスマートカーラー」へ修正する。</strong>
+        実際には巻いた後に加熱するため、無加熱と誤認される表現は避ける。商品価値は「火傷不安の入口を消すこと」「部位別温度管理」「使い方の失敗を減らすこと」に置く。
+      </div>
+    </section>
+
+    <section aria-labelledby="agents-title">
+      <h2 id="agents-title">Agent分担</h2>
+      <div class="grid-4">
+        <article class="card">
+          <span class="tag strategy">Agent A / Strategy</span>
+          <h3>市場・ターゲット</h3>
+          <p>空白市場の主張を、出典付きの競合表と小さな検証単位に置き換える。</p>
+          <div class="list small">
+            <div>国内価格帯の再調査</div>
+            <div>コテ常用層とホットカーラー離脱層の仮説分離</div>
+            <div>購買理由を「ダメージ」だけに依存させない</div>
+          </div>
+        </article>
+        <article class="card">
+          <span class="tag product">Agent B / Product</span>
+          <h3>仕様・安全</h3>
+          <p>60秒加熱、4本同時制御、電池、温度ムラ、物理操作を成立条件として洗い出す。</p>
+          <div class="list small">
+            <div>PSE・電池・発熱安全の確認</div>
+            <div>アプリ不使用時の操作設計</div>
+            <div>プロトタイプ試験項目の作成</div>
+          </div>
+        </article>
+        <article class="card">
+          <span class="tag business">Agent C / Business</span>
+          <h3>原価・量産</h3>
+          <p>OEMに聞かれるMOQ、原価レンジ、初回ロット、販売価格の粗利構造を仮置きする。</p>
+          <div class="list small">
+            <div>原価BOMの初期仮説</div>
+            <div>MOQ 500 / 1,000 / 3,000の比較</div>
+            <div>クラファン・サロン先行販売の選択肢</div>
+          </div>
+        </article>
+        <article class="card">
+          <span class="tag visual">Agent D / Visual</span>
+          <h3>画像・体験</h3>
+          <p>製品単体、使用シーン、アプリ連動の3カットを先に作り、提案の理解速度を上げる。</p>
+          <div class="list small">
+            <div>プロダクトレンダリング</div>
+            <div>装着時の冷たさが伝わる使用カット</div>
+            <div>温度管理UIの説明画像</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="position-title">
+      <h2 id="position-title">再設計したポジショニング</h2>
+      <div class="grid-3">
+        <article class="card">
+          <div class="kpi">入口</div>
+          <h3>熱い道具を持たせない</h3>
+          <p>従来ホットカーラーの不安は、カール性能以前に「熱いものを髪に巻く怖さ」。本製品は装着時の心理障壁を下げる。</p>
+        </article>
+        <article class="card">
+          <div class="kpi">制御</div>
+          <h3>部位別に温度を変える</h3>
+          <p>前髪・トップ・サイドで必要な温度を変え、毎朝の失敗を減らす。ただしアプリ依存は避け、物理スタートを併用する。</p>
+        </article>
+        <article class="card">
+          <div class="kpi">道具</div>
+          <h3>棚に置ける美容家電</h3>
+          <p>ステンレス、白磁、ウォームウッド調を基本に、洗面台やサロン受付に置けるプロダクト感を作る。</p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="lock-title">
+      <h2 id="lock-title">最重要論点：髪をどう固定するか</h2>
+      <div class="notice">
+        <strong>この商品の成否は、アプリでも温度制御でもなく「巻いた髪が自然にほどけない固定機構」で決まる。</strong>
+        クリップを大きく付けると既存ホットカーラーに戻ってしまう。一方で完全クリップレスに寄せすぎると、髪質・毛量・レイヤーによって保持力が足りない。v2では「できるだけクリップを使わないが、必要最小限の保持補助は許す」方針にする。
+      </div>
+      <div class="grid-3" style="margin-top:16px;">
+        <article class="card">
+          <span class="tag risk">P0 / Hold</span>
+          <h3>摩擦で保持する</h3>
+          <p>外周に柔らかい微細リブ、シリコン帯、浅いスパイラル溝を入れる。髪を傷めず、ほどく時に引っかからない摩擦係数が必要。</p>
+        </article>
+        <article class="card">
+          <span class="tag risk">P0 / Lock</span>
+          <h3>端だけ軽く留める</h3>
+          <p>大きなクリップではなく、毛先を差し込む短いスリットや薄い押さえリングで初動だけ固定する。見た目の古さを避ける。</p>
+        </article>
+        <article class="card">
+          <span class="tag risk">P0 / Test</span>
+          <h3>髪質別に落下テスト</h3>
+          <p>細毛、太毛、レイヤー、前髪、湿度差で保持力を検証する。机上スペックでは判断できないため、モック試作の最初の検証項目にする。</p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="comparison-title">
+      <h2 id="comparison-title">競合比較の再定義</h2>
+      <div class="table-wrap">
+        <table>
+          <caption>価格は販売チャネルや時期で変動するため、外部提出前に確認日付きで更新する。</caption>
+          <thead>
+            <tr>
+              <th scope="col">カテゴリ</th>
+              <th scope="col">代表例</th>
+              <th scope="col">現時点で確認できる特徴</th>
+              <th scope="col">HEJが取るべき差別化</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>高価格スタイラー</td>
+              <td>Dyson Airwrap</td>
+              <td>風でカール、ドライ兼用、ブランド力が強い。公式上でもモデルにより価格差がある。</td>
+              <td>「Dysonの廉価代替」ではなく、冷装着カーラーという別体験に寄せる。</td>
+            </tr>
+            <tr>
+              <td>既存ホットカーラー</td>
+              <td>Panasonic カールン8 / 4</td>
+              <td>カーラー径・本数が明確。準備時間は大カーラー約60秒、特大・大大で約90秒。</td>
+              <td>熱い状態で巻く不安と、見た目の古さを主な乗り換え理由にする。</td>
+            </tr>
+            <tr>
+              <td>コテ・ヘアアイロン</td>
+              <td>クレイツ等</td>
+              <td>安価から高級機まで広い。技術習熟と火傷リスクが残る。</td>
+              <td>毎日使いの失敗回避、低温管理、前髪だけの時短を訴求する。</td>
+            </tr>
+            <tr>
+              <td>HEJ仮説</td>
+              <td>Cold-wrap Smart Curler</td>
+              <td>装着時は室温、装着後に部位別加熱、4本同時スタンド充電。</td>
+              <td>安全・UX・量産性が成立した場合のみ、中価格帯の新カテゴリとして提案する。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="spec-title">
+      <h2 id="spec-title">v2仕様仮説</h2>
+      <div class="grid-3">
+        <article class="card">
+          <span class="tag risk">最優先</span>
+          <h3>クリップレス寄り固定</h3>
+          <p>外周リブ、毛先スリット、薄型押さえリングの3案を試す。完全クリップレスを理想に置きつつ、保持できない場合は小型ロックを許容する。</p>
+        </article>
+        <article class="card">
+          <span class="tag product">必須</span>
+          <h3>サイズ可変</h3>
+          <p>30 / 32 / 34mmの外径切替は、巻く前にセットする方式を前提にする。髪を巻いた後に径を変える構造は複雑化しすぎる。</p>
+        </article>
+        <article class="card">
+          <span class="tag product">要検証</span>
+          <h3>長さ可変</h3>
+          <p>前髪用の短尺、サイド用の標準長を分けるか、伸縮式にするかを検討する。伸縮式は強度・配線・加熱ムラのリスクが高い。</p>
+        </article>
+        <article class="card">
+          <span class="tag product">必須</span>
+          <h3>重量と装着感</h3>
+          <p>目標は1本70〜85g台。重いと落下し、軽すぎると電池・発熱部材が成立しない。固定機構と重量は同時に検証する。</p>
+        </article>
+        <article class="card">
+          <span class="tag product">必須</span>
+          <h3>持ち運び</h3>
+          <p>4本＋スタンド＋ポーチで旅行に入るサイズにする。ポーチ内でカーラーが動かず、接点や外周リブが傷まない仕切りが必要。</p>
+        </article>
+        <article class="card">
+          <span class="tag product">必須</span>
+          <h3>アプリなしでも使える</h3>
+          <p>40代以降の初回離脱を防ぐため、本体またはスタンドに「開始」「温度」「残量」の最低限UIを持たせる。</p>
+        </article>
+        <article class="card">
+          <span class="tag product">必須</span>
+          <h3>温度フェイルセーフ</h3>
+          <p>上限温度、過熱停止、肌接触時の熱感、温度ムラをテスト項目化する。美容師監修だけでは安全根拠にならない。</p>
+        </article>
+        <article class="card">
+          <span class="tag product">必須</span>
+          <h3>4本同時の成立性</h3>
+          <p>1本ずつ使用なら所要時間が伸びる。訴求は「4本同時使用時」と明記し、1本運用時の目安も併記する。</p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="gate-title">
+      <h2 id="gate-title">外部提案前の判断ゲート</h2>
+      <div class="roadmap">
+        <article class="step">
+          <div>
+            <h3>固定機構の一次モック</h3>
+            <p>外周リブ、毛先スリット、薄型押さえリングの3案を、3Dプリントまたは簡易モックで比較する。ここが通らなければ商品化しない。</p>
+          </div>
+        </article>
+        <article class="step">
+          <div>
+            <h3>サイズ・重量・携帯性の実測目標</h3>
+            <p>外径30 / 32 / 34mm、標準長、短尺モデル、1本70〜85g台、4本＋スタンド＋ポーチの収納寸法を仮置きする。</p>
+          </div>
+        </article>
+        <article class="step">
+          <div>
+            <h3>技術成立性の一次確認</h3>
+            <p>ヒーター、電池、充電スタンド、BLE、温度制御、物理操作、発熱安全をOEMに質問できる粒度へ落とす。</p>
+          </div>
+        </article>
+        <article class="step">
+          <div>
+            <h3>原価・MOQ仮説</h3>
+            <p>売価19,800円と24,800円で、製造原価、物流、保証、販促、粗利が成立するか確認する。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="image-title">
+      <h2 id="image-title">画像提案</h2>
+      <div class="grid-3">
+        <article class="card image-brief">
+          <div>
+            <span class="tag visual">Image 01</span>
+            <h3>製品ヒーロー</h3>
+          </div>
+          <div class="image-frame">
+            <img src="hej_smart_curler_assets/hej-smart-curler-hero-draft-01.png" alt="4本のスマートカーラー、充電スタンド、トラベルポーチの製品ヒーローラフ">
+          </div>
+          <p class="small">生成済みラフ。次の反復では、髪に巻ける軽さ、固定クリップ、径の違いが伝わるように形状を調整する。</p>
+          <pre>Use case: product-mockup
+Asset type: concept deck hero image
+Primary request: a premium smart hair curler set for HEJ Cold-wrap Smart Curler
+Scene/backdrop: warm off-white studio surface, minimal Japanese beauty appliance styling
+Subject: four cylindrical smart hair curlers resting in a compact USB-C charging stand, one open travel pouch beside it
+Style/medium: photorealistic product render, premium consumer electronics
+Composition/framing: 3/4 top-down angle, product centered, enough negative space for Japanese headline
+Lighting/mood: soft diffused studio light, calm, trustworthy
+Color palette: white ceramic, brushed stainless steel, subtle warm wood accent, muted charcoal details
+Materials/textures: satin plastic, brushed metal, matte silicone grip, small LED battery indicators
+Text: no text, no logo, no watermark
+Avoid: no Dyson-like forms, no exaggerated sci-fi, no visible heating glow</pre>
+        </article>
+
+        <article class="card image-brief">
+          <div>
+            <span class="tag visual">Image 02</span>
+            <h3>使用シーン</h3>
+          </div>
+          <div class="image-frame">装着時に熱くないことを伝える、洗面台前の朝シーン。</div>
+          <pre>Use case: photorealistic-natural
+Asset type: user scenario image for product prototype
+Primary request: a woman calmly attaching a room-temperature smart hair curler before heating begins
+Scene/backdrop: bright Japanese apartment bathroom vanity in the morning
+Subject: adult woman attaching one curler near the front hair area, relaxed expression, smartphone and charging stand visible nearby
+Style/medium: natural editorial product photography
+Composition/framing: medium close-up, product clearly visible, hands not covering the curler
+Lighting/mood: clean morning light, gentle and credible
+Color palette: natural skin tones, white vanity, muted wood, brushed metal
+Constraints: communicate "not hot while attaching" through calm handling, no steam, no red heat, no burn-risk imagery
+Text: no text, no watermark
+Avoid: salon glamour, overstyled hair, medical claims, dramatic beauty ad posing</pre>
+        </article>
+
+        <article class="card image-brief">
+          <div>
+            <span class="tag visual">Image 03</span>
+            <h3>アプリUI説明</h3>
+          </div>
+          <div class="image-frame">部位別温度と本体LEDを見せる、投資家・メーカー向け説明画像。</div>
+          <pre>Use case: ui-mockup
+Asset type: app and hardware interaction mockup
+Primary request: a clean smartphone app screen controlling four smart hair curlers by hair area
+Scene/backdrop: smartphone beside the charging stand on a neutral studio surface
+Subject: app UI showing four curler cards, temperature chips 40, 50, 60 C, battery levels, start button, and safety status
+Style/medium: high-fidelity UI mockup plus product render
+Composition/framing: phone on left, charging stand with four curlers on right
+Lighting/mood: precise, technical, premium
+Color palette: off-white, charcoal, muted green, warm wood accent
+Text: use short Japanese labels only: "前髪", "トップ", "サイド", "開始", "安全確認"
+Constraints: UI must look readable, not crowded, no fake brand logos
+Avoid: complex dashboard, neon colors, medical or damage-repair claims</pre>
+        </article>
+
+        <article class="card image-brief">
+          <div>
+            <span class="tag visual">Image 04</span>
+            <h3>固定機構クローズアップ</h3>
+          </div>
+          <div class="image-frame">
+            <img src="hej_smart_curler_assets/hej-smart-curler-hold-mechanism-draft-01.png" alt="クリップレス寄り固定機構を検討するスマートカーラーのクローズアップラフ">
+          </div>
+          <p class="small">生成済みラフ。固定機構の議論用。次の反復では、実際に髪が巻きついた状態と、ほどけにくさをより明確にする。</p>
+          <pre>Use case: product-mockup
+Asset type: industrial design mechanism close-up
+Primary request: a compact smart hair curler designed to hold rolled hair with minimal or no large clip
+Subject: one cylindrical smart hair curler showing shallow spiral silicone micro-ribs, a small hair-end insertion slit, and a very thin sliding retaining ring
+Composition/framing: macro 3/4 close-up, barrel fills most of the image
+Materials/textures: satin ceramic plastic, matte silicone, brushed metal
+Constraints: no large clamp, no traditional bulky clip, no red heat glow, no text, no logo
+Next iteration: show a small lock of hair actually wrapped around the barrel without falling loose</pre>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="tasks-title">
+      <h2 id="tasks-title">次に進めるタスク</h2>
+      <div class="table-wrap">
+        <table>
+          <caption>この表をそのまま作業分解として使う。</caption>
+          <thead>
+            <tr>
+              <th scope="col">優先</th>
+              <th scope="col">担当</th>
+              <th scope="col">タスク</th>
+              <th scope="col">成果物</th>
+              <th scope="col">完了条件</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>P0</td>
+              <td>Agent B</td>
+              <td>固定機構の比較</td>
+              <td>外周リブ / 毛先スリット / 薄型押さえリングの3案</td>
+              <td>髪質別に巻いた後の保持力と外しやすさを比較できる</td>
+            </tr>
+            <tr>
+              <td>P0</td>
+              <td>Agent B</td>
+              <td>サイズ・重量・可変構造の仮設計</td>
+              <td>外径30 / 32 / 34mm、長さ、重量、収納寸法の表</td>
+              <td>持ち運びと装着感のどちらを優先するか判断できる</td>
+            </tr>
+            <tr>
+              <td>P0</td>
+              <td>Agent A</td>
+              <td>競合価格・機能表の再調査</td>
+              <td>確認日付き比較表</td>
+              <td>公式または主要販売元URLが付いている</td>
+            </tr>
+            <tr>
+              <td>P1</td>
+              <td>Agent B</td>
+              <td>安全・規制の論点整理</td>
+              <td>OEM質問票</td>
+              <td>PSE、電池、無線、発熱安全の質問が入っている</td>
+            </tr>
+            <tr>
+              <td>P1</td>
+              <td>Agent C</td>
+              <td>原価・MOQ・売価の仮説</td>
+              <td>簡易BOMと粗利表</td>
+              <td>19,800円 / 24,800円の成立条件が見える</td>
+            </tr>
+            <tr>
+              <td>P1</td>
+              <td>Agent D</td>
+              <td>画像3カット生成</td>
+              <td>ヒーロー、使用、UIのラフ画像</td>
+              <td>説明なしで「冷装着」「4本」「アプリ/本体操作」が伝わる</td>
+            </tr>
+            <tr>
+              <td>P2</td>
+              <td>All</td>
+              <td>8枚デッキ化</td>
+              <td>PPTX / PDF</td>
+              <td>内部メモ表記を消し、外部向けの断定レベルに揃える</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="sources-title">
+      <h2 id="sources-title">参照メモ</h2>
+      <ul class="source-list">
+        <li>Dyson公式 Airwrapページでは、モデルにより価格表示が異なる。価格比較はモデル名と確認日を固定する必要がある。<a href="https://www.dyson.co.jp/hair-care/hair-stylers/airwrap/multi-styler-ceramic-pink">Dyson Airwrap 公式ページ</a></li>
+        <li>Panasonic カールン8 EH-HC50は、35mm 2本、30mm 4本、25mm 2本。準備時間は大カーラー約60秒、特大・大大約90秒。<a href="https://panasonic.jp/hair/products/EH-HC50/spec.html">Panasonic EH-HC50 仕様</a></li>
+        <li>リチウムイオン蓄電池は条件により電気用品安全法の規制対象となり、PSE表示等の確認が必要。<a href="https://www.meti.go.jp/product_safety/consumer/lithium_ion_battery.html">経済産業省 リチウムイオン蓄電池の注意喚起</a></li>
+        <li>電気用品安全法では、対象電気用品の製造・輸入・販売等に関する技術基準適合や表示義務がある。<a href="https://www.meti.go.jp/english/policy/economy/consumer/pse/index.html">METI Electrical Appliances and Materials Safety Act</a></li>
+      </ul>
+    </section>
+  </main>
+</div>
+</body>
+</html>
