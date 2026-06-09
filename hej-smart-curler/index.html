@@ -448,7 +448,7 @@
           <p>外周の浅いスパイラルガイド、低摩擦の山、柔らかい帯で髪を外側に寝かせたまま保持する。絡ませず、ほどく時に引っかけない。</p>
         </article>
       </div>
-      <div class="grid-2" style="margin-top:16px;">
+      <div class="grid-3" style="margin-top:16px;">
         <article class="card">
           <span class="tag product">Route A</span>
           <h3>Air-assist wrap</h3>
@@ -467,6 +467,16 @@
             <div>利点：軽い、静か、電池消費が少ない、持ち運びしやすい。</div>
             <div>課題：細毛・太毛・レイヤーで保持力が変わる。</div>
             <div>検証：浅いスパイラル山、シリコン帯、表面粗さの比較。</div>
+          </div>
+        </article>
+        <article class="card">
+          <span class="tag product">Route C</span>
+          <h3>Self-contained curler</h3>
+          <p>1本のカーラー内に小型ファン、風路、電池、制御基板を入れて完結させる案。冷風切替だけなら成立可能性はある。ペルチェ冷却まで入れると排熱と重量が一気に重くなる。</p>
+          <div class="list small">
+            <div>利点：単体で使える。4本それぞれを独立制御できる。</div>
+            <div>課題：直径、重量、電池持ち、騒音、吸気口の髪巻き込み防止。</div>
+            <div>現実ライン：冷風=ヒーターOFF常温風。能動冷却=ペルチェは上位/大型モデル候補。</div>
           </div>
         </article>
       </div>
@@ -522,12 +532,12 @@
         </article>
         <article class="card">
           <span class="tag product">Hybrid</span>
-          <h3>HEJ向け分離構造</h3>
-          <p>送風・冷却源はハンドルまたはスタンド側に置き、髪に残るカーラーは軽量な外周バレルにする。ここが現実的な本命。</p>
+          <h3>HEJ向け構造分岐</h3>
+          <p>一体完結カーラーは可能。ただし、軽さを優先するなら送風・冷却源をハンドル/スタンド側に逃がす。単体完結を優先するなら冷風切替までを本体内蔵し、ペルチェは慎重に扱う。</p>
           <div class="list small">
             <div>巻く：細い縦スリットから常温/冷風で外周へ誘導。</div>
-            <div>保持：軽いバレルと薄い保持スリーブで固定。</div>
-            <div>冷やす：必要ならスタンド側で冷風を作り、カーラーへ送る。</div>
+            <div>保持：外周ガイド、薄い保持スリーブ、または低風量キープで固定。</div>
+            <div>冷やす：本体内蔵冷風、別体ハンドル送風、スタンド送風の3案を比較。</div>
           </div>
         </article>
       </div>
@@ -546,7 +556,7 @@
             <tr>
               <td>1. カーラー単体ファン内蔵</td>
               <td>各カーラーに小型ファン、風路、電池、制御基板、温度センサーを入れる。</td>
-              <td>使い勝手は強いが、4本セットでは重量・原価が厳しい。</td>
+              <td><strong>可能。</strong> 冷風切替までなら一体完結モデルとして成立候補。</td>
               <td>重い、太い、騒音、電池持ち、排熱。</td>
             </tr>
             <tr>
@@ -564,8 +574,14 @@
             <tr>
               <td>4. ペルチェ内蔵カーラー</td>
               <td>各カーラーにペルチェ、冷却面、排熱面、ファン、電池を入れる。</td>
-              <td>冷却家電としては分かりやすいが、カーラーには重すぎる可能性が高い。</td>
+              <td>上位モデル候補。室温以下の冷感は作れるが、標準4本セットには重い可能性が高い。</td>
               <td>結露、排熱、重量、コスト、髪への冷却効率。</td>
+            </tr>
+            <tr>
+              <td>5. 一体完結・冷風モデル</td>
+              <td>各カーラーに小型ファン、吸気口、縦スリット風路、ヒーターOFF冷風モード、低温ヒーターを入れる。</td>
+              <td><strong>最初に検討すべき一体型。</strong> ペルチェなしなら重量を抑えやすい。</td>
+              <td>吸気口の配置、髪巻き込み防止、バッテリー、騒音。</td>
             </tr>
           </tbody>
         </table>
@@ -621,7 +637,7 @@
         <article class="card">
           <span class="tag risk">最優先</span>
           <h3>クリップレス寄り固定</h3>
-          <p>毛先を内側へ通す構造は避ける。風で巻くRoute A、または外周表面で保持するRoute Bの2案に絞る。</p>
+          <p>毛先を内側へ通す構造は避ける。風で巻くRoute A、外周表面で保持するRoute B、一体完結カーラーのRoute Cを比較する。</p>
         </article>
         <article class="card">
           <span class="tag product">必須</span>
@@ -667,7 +683,7 @@
         <article class="step">
           <div>
             <h3>固定機構の一次モック</h3>
-            <p>内側スリット案はNG寄り。風で巻くRoute Aと、表面で保持するRoute Bの2案を、3Dプリントまたは簡易モックで比較する。</p>
+            <p>内側スリット案はNG寄り。風で巻くRoute A、表面で保持するRoute B、一体完結Route Cを、3Dプリントまたは簡易モックで比較する。</p>
           </div>
         </article>
         <article class="step">
@@ -873,15 +889,15 @@ Key message: the surface geometry holds hair gently while allowing easy release<
               <td>P0</td>
               <td>Agent B</td>
               <td>固定機構の比較</td>
-              <td>Route A 風巻き / Route B 表面保持</td>
-              <td>髪を内側へ通さず、よじれずに巻き付くか比較できる</td>
+              <td>Route A 風巻き / Route B 表面保持 / Route C 一体完結</td>
+              <td>髪を内側へ通さず、よじれずに巻き付く方式を比較できる</td>
             </tr>
             <tr>
               <td>P0</td>
               <td>Agent B</td>
               <td>冷風・冷却構造の比較</td>
-              <td>常温風 / ペルチェ / 別体ハンドル / 送風スタンドの構造表</td>
-              <td>カーラー本体を重くせずに冷却体験を作る方式が選べる</td>
+              <td>一体冷風 / ペルチェ / 別体ハンドル / 送風スタンドの構造表</td>
+              <td>一体完結と軽量分離のどちらを優先するか判断できる</td>
             </tr>
             <tr>
               <td>P0</td>
